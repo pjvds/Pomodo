@@ -39,7 +39,14 @@
 	},
 	
 	fireTickEvent: function() {
-		document.fire('pomodorotimer:tick', {millisecondsLeft: this.millisecondsLeft});
+		var t = this.millisecondsLeft;
+		var s = Math.round(t/1000);
+		var m = Math.floor(s/60);
+		var h = Math.floor(m/60);
+		s=s%60;
+	
+		document.fire('pomodorotimer:tick', {milliseconds: this.millisecondsLeft, 
+											 seconds: s, minutes: m, hours: h});
 	},
 	
 	getTime: function() {	
