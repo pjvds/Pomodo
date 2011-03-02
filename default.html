@@ -1,7 +1,7 @@
 <html>
   <head>
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-  	<script type="text/javascript">google.load("prototype", "1.7.0.0");</script>
+    <script type="text/javascript" src="js/prototype.js"></script>
+    <script type="text/javascript" src="js/date.js"></script>
     <script type="text/javascript">
       function init() {
         var p = new PomodoroTimer();
@@ -17,9 +17,8 @@
           this.total = 0.0;
         },
       
-        start: function() {
+        start: function(length) {
           this.base = this.getTime();
-          
           
           document.fire('pomodorotimer:started');
           this.update();
@@ -33,7 +32,6 @@
         },
         
         show: function() {
-          //var t = this.timer ? this.getTime() - this.base : this.total;
           var t = this.getTime() - this.base;
           var s = Math.round(t/1000);
           var m = Math.floor(s/60);
