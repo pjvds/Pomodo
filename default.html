@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+  	<script type="text/javascript">google.load("prototype", "1.7.0.0");</script>
+    <script type="text/javascript">
+      function init() {
+        var p = new PomodoroTimer();
+        p.start();
+        
+        document.observe('pomodorotimer:tick', function(evt) {
+          $('t').innerHTML = evt.memo.timeText;
+        });
+      }
+    
+      var PomodoroTimer = Class.create({
+        initialize: function() {
+          this.total = 0.0;
+        },
+      
+        start: function() {
+          this.base = this.getTime();
+          
+          
+          document.fire('pomodorotimer:started');
+          this.update();
+        },
+        
+        update: function() {
+          this.show();
+          
+          dt = 1000 - (this.getTime()-this.base)%1000;
+          this.timer = setTimeout(function(thisObj) {thisObj.update();}, dt, this);
+        },
+        
+        show: function() {
+          //var t = this.timer ? this.getTime() - this.base : this.total;
+          var t = this.getTime() - this.base;
+          var s = Math.round(t/1000);
+          var m = Math.floor(s/60);
+          var h = Math.floor(m/60);
+          s = s%60;
+          if (s < 10) s = "0"+s;
+          m = m%60;
+          if (m < 10) m = "0"+m;
+          if (h < 10) h = "0"+h;
+        
+          var timeText = h+":"+m+":"+s;
+          document.fire('pomodorotimer:tick', {timeText: timeText, time: t, seconds: s, minutes: m, hours: h});
+        },
+        
+        getTime: function() {	
+          var now = new Date;
+          return now.getTime();
+        }
+      });
+    </script>
+  </head>
+  <body onload="init()">
+    <div id="t">
+      00:00:00
+    </div>
+  </body>
+</html>
