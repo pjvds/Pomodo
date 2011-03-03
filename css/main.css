@@ -1,0 +1,54 @@
+/* Tell the browser to render HTML 5 elements as block */
+header, footer, aside, nav, article {
+	display: block;
+}
+
+body {
+  text-align: center;
+	margin: 0 auto;
+	font: 13px/22px Helvetica, Arial, sans-serif;
+	background: #F1F3F6;
+	text-shadow: white 0px 1px 0px, rgba(0, 0, 0, 0.199219) 0px 2px 5px;
+}
+
+#display {
+  display: inline-block;
+  background: #F47920;
+  border-radius: 16px;
+  z-index:1000;
+  position: relative;
+}
+
+#value {
+  color: white;
+  padding: 14px;
+  font: normal normal normal 11.5em/normal Inconsolata;
+  z-index:1050;
+}
+
+#pomodoro {
+  position: absolute;
+  display: block;
+  border-top-right-radius: 22px;
+  z-index:10;
+}
+
+#shortbreak {
+
+}
+
+#longbreak {
+  border-bottom-right-radius: 22px;
+}
+
+.tab {
+  padding-right: 6px;
+  position: absolute;
+  display: block;
+  text-align: right;
+  vertical-align: middle;
+  background: #ffffff;
+  border-style: solid;
+  border-width: 1px;
+  border-color: grey;
+}

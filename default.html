@@ -1,23 +1,100 @@
 <html>
   <head>
-    <script type="text/javascript" src="js/prototype.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.0.0/prototype.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/date.js"></script>
-	<script type="text/javascript" src="js/pomodo.js"></script>
+    <script type="text/javascript" src="js/pomodo.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
 
     <script type="text/javascript">
+      var pTimer;
+    
       function init() {
-        var p = new PomodoroTimer();
-        p.start(10000000000);
+        jQuery.noConflict();
+      
+        pTimer = new PomodoroTimer();
+        
+        wirePomodoroEvents();
+        wireUserInterfaceCommandEvents();
+        wireUserInterfaceEyeCandyEvents();
+      }
+      
+      function wirePomodoroEvents() {
+        document.observe('pomodorotimer:started', function(evt) {
+          setTime(evt);
+        });
         
         document.observe('pomodorotimer:tick', function(evt) {
-			$('t').innerHTML = evt.memo.hours+":"+evt.memo.minutes+":"+evt.memo.seconds+" ("+evt.memo.milliseconds+")";
+          setTime(evt);
         });
+        
+        document.observe('pomodorotimer:finished', function(evt) {
+          notify();
+        });
+      }
+      
+      function wireUserInterfaceCommandEvents() {
+        $('pomodoro').observe('click', function(evt) {
+           pTimer.startPomodoro(); 
+        });
+        
+        $('shortbreak').observe('click', function(evt) {
+           pTimer.startShortBreak(); 
+        });
+        
+        $('longbreak').observe('click', function(evt) {
+           pTimer.startLongBreak();
+        });
+      }
+      
+      function wireUserInterfaceEyeCandyEvents() {
+        var tabCount = 3;
+        var margin=12;
+
+        var display = jQuery('#display');
+        var displayHeight = jQuery('#display').height();
+        var refLeft = display.offset().left+display.width();
+        var refTop = display.offset().top;
+        var tabHeight = Math.floor(display.height()/tabCount);
+      
+        jQuery('.tab').each(function(index, tab) {
+          tab = jQuery(tab);
+          tab.css({"width": display.width()+'px',
+                   "height": (tabHeight-1)+'px',
+                   "left": (refLeft-display.width()+margin)+'px',
+                   "top": Math.floor(refTop+(index*(tabHeight)))+'px'
+          });
+          
+          jQuery(tab).mouseenter(function(){
+            jQuery(this).animate({left: '+=65'});
+          });
+          
+          jQuery(tab).mouseleave(function(){
+            jQuery(this).animate({left: '-=65'});
+          });
+        });
+      }
+      
+      function setTime(evt) {
+        var m = evt.memo.minutes;
+        var s = evt.memo.seconds;
+        
+        if(m < 10) { m = '0'+m; }
+        if(s < 10) { s = '0'+s; }
+        
+        $('value').innerHTML = m+':'+s;
       }
     </script>
   </head>
   <body onload="init()">
-    <div id="t">
-      00:00:00
-    </div>
+    <header>
+      <h1>Pomodo</h1>
+    </header>
+      <div id="display">
+        <div id="value">00:00</div>
+      </div>
+      <div id="pomodoro" class="tab"><p>Pomodoro</p></div>
+      <div id="shortbreak" class="tab"><p>Short break</p></div>
+      <div id="longbreak" class="tab"><p>long break</p></div>
   </body>
 </html>
