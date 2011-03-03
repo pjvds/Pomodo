@@ -19,8 +19,13 @@
       this.base = this.getTime();
       this.lastUpdate = this.base;
       
-      document.fire('pomodorotimer:started');
+      this.fireStartedEvent(this.millisecondsLeft);
       this.update();
+    },
+    
+    fireStartedEvent: function (timeInMilliseconds) {
+      var e = this.createTimeEventArgs(timeInMilliseconds);
+      document.fire('pomodorotimer:started', e);
     },
     
     update: function() {    
@@ -28,8 +33,18 @@
       this.lastUpdate = this.getTime();
       
       this.millisecondsLeft -= diffInMs;
-      this.fireTickEvent();
-      
+
+      if(this.millisecondsLeft > 0) {
+        this.fireTickEvent(this.millisecondsLeft);
+        this.scheduleNextUpdate();
+      }else{
+        this.millisecondsLeft = 0;
+        this.fireTickEvent(0);
+        this.finish();
+      }
+    },
+    
+    scheduleNextUpdate: function() {
       // Schedule next update.
       dt = 1000 - (this.getTime()-this.base)%1000;
       this.timer = setTimeout(function(thisObj) {thisObj.update();}, dt, this);
@@ -63,19 +78,22 @@
       document.fire('pomodorotimer:finished');
     },
     
-    fireTickEvent: function() {
-      var t = this.millisecondsLeft;
-
-      var hours = Math.floor(t/60/60/1000);
-      t = t-(hours*60*60*1000);
+    fireTickEvent: function(millisecondsLeft) {
+      var e = this.createTimeEventArgs(millisecondsLeft);
+    
+      document.fire('pomodorotimer:tick', e);
+    },
+    
+    createTimeEventArgs: function(millisecondsLeft) {
+      var t = millisecondsLeft;
       
       var minutes = Math.floor(t/60/1000);
       t = t-(minutes*60*1000);
       
       var seconds = Math.round(t/1000);
-    
-      document.fire('pomodorotimer:tick', {milliseconds: this.millisecondsLeft, 
-                         seconds: seconds, minutes: minutes, hours: hours});
+      
+      return {milliseconds: this.millisecondsLeft, 
+               seconds: seconds, minutes: minutes};
     },
     
     getTime: function() {	
