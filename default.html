@@ -5,12 +5,21 @@
 	<script type="text/javascript" src="js/pomodo.js"></script>
 
     <script type="text/javascript">
+      var pTimer;
+    
       function init() {
-        var p = new PomodoroTimer();
-        p.start(10000000000);
+        pTimer = new PomodoroTimer();
+        
+        document.observe('pomodorotimer:started', function(evt) {
+          $('t').innerHTML = evt.memo.minutes+":"+evt.memo.seconds+" ("+evt.memo.milliseconds+")";
+        });
         
         document.observe('pomodorotimer:tick', function(evt) {
-			$('t').innerHTML = evt.memo.hours+":"+evt.memo.minutes+":"+evt.memo.seconds+" ("+evt.memo.milliseconds+")";
+          $('t').innerHTML = evt.memo.minutes+":"+evt.memo.seconds+" ("+evt.memo.milliseconds+")";
+        });
+        
+        $('start').observe('click', function(evt) {
+           pTimer.start(10000); 
         });
       }
     </script>
@@ -19,5 +28,7 @@
     <div id="t">
       00:00:00
     </div>
+    <div id="start">start</div>
+    <div id="stop">stop</div>
   </body>
 </html>
