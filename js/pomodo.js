@@ -25,10 +25,9 @@
     
     update: function() {    
       var diffInMs = this.getTime()-this.lastUpdate;
-      this.millisecondsLeft -= diffInMs;
-      
-      // Update time and fire tick event.
       this.lastUpdate = this.getTime();
+      
+      this.millisecondsLeft -= diffInMs;
       this.fireTickEvent();
       
       // Schedule next update.
