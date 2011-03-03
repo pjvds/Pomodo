@@ -1,11 +1,11 @@
 
   function init() {
-	var p = new PomodoroTimer();
-	p.start();
-	
-	document.observe('pomodorotimer:tick', function(evt) {
-      $('t').innerHTML = evt.memo.timeText;
-    });
+    var p = new PomodoroTimer();
+    p.start();
+    
+    document.observe('pomodorotimer:tick', function(evt) {
+        $('t').innerHTML = evt.memo.timeText;
+      });
   }
 
   var PomodoroTimer = Class.create({
@@ -23,9 +23,7 @@
       this.update();
     },
     
-    update: function() {
-      this.secondsLeft;
-      
+    update: function() {    
       var diffInMs = this.getTime()-this.lastUpdate;
       this.millisecondsLeft -= diffInMs;
       
@@ -38,8 +36,33 @@
       this.timer = setTimeout(function(thisObj) {thisObj.update();}, dt, this);
     },
     
+    stop: function() {
+      this.disposeCurrentWork();
+      this.fireStoppedEvent();
+    },
+    
+    finish: function() {
+      this.disposeCurrentWork();
+      this.fireFinishedEvent();
+    },
+    
+    disposeCurrentWork: function() {
+      this.timer = null;
+      this.lastUpdate = null;
+      this.millisecondsLeft = null;
+    },
+    
+    fireStoppedEvent: function() {
+      document.fire('pomodorotimer:stopped');
+    },
+    
+    fireFinishedEvent: function() {
+      document.fire('pomodorotimer:finished');
+    },
+    
     fireTickEvent: function() {
       var t = this.millisecondsLeft;
+
       var hours = Math.floor(t/60/60/1000);
       t = t-(hours*60*60*1000);
       
