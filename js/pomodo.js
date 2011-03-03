@@ -46,7 +46,11 @@
     },
     
     disposeCurrentWork: function() {
-      this.timer = null;
+      if(this.timer) {
+        clearTimeout(this.timer);
+        this.timer = null;
+      }
+      
       this.lastUpdate = null;
       this.millisecondsLeft = null;
     },
