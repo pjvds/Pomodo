@@ -16,7 +16,6 @@
         
         wirePomodoroEvents();
         wireUserInterfaceCommandEvents();
-        wireUserInterfaceEyeCandyEvents();
       }
       
       function wirePomodoroEvents() {
@@ -47,34 +46,6 @@
         });
       }
       
-      function wireUserInterfaceEyeCandyEvents() {
-        /*var tabCount = 3;
-        var margin=12;
-
-        var display = jQuery('#display');
-        var displayHeight = jQuery('#display').height();
-        var refLeft = display.offset().left+display.width();
-        var refTop = display.offset().top;
-        var tabHeight = Math.floor(display.height()/tabCount);
-      
-        jQuery('.tab').each(function(index, tab) {
-          tab = jQuery(tab);
-          tab.css({"width": display.width()+'px',
-                   "height": (tabHeight-1)+'px',
-                   "left": (refLeft-display.width()+margin)+'px',
-                   "top": Math.floor(refTop+(index*(tabHeight)))+'px'
-          });
-          
-          jQuery(tab).mouseenter(function(){
-            jQuery(this).animate({left: '+=65'});
-          });
-          
-          jQuery(tab).mouseleave(function(){
-            jQuery(this).animate({left: '-=65'});
-          });
-        });*/
-      }
-      
       function setTime(evt) {
         var m = evt.memo.minutes;
         var s = evt.memo.seconds;
@@ -95,9 +66,9 @@
         <div id="value">00:00</div>
       </div>
 	<nav id="inputstrip">
-		<a id="pomodoro" class="tab">Pomodoro</a>
-		<a id="shortbreak" class="tab">Short break</a>
-		<a id="longbreak" class="tab">long break</a>
+		<a id="pomodoro" href="#">Pomodoro</a>
+		<a id="shortbreak" href="#">Short break</a>
+		<a id="longbreak" href="#">long break</a>
 	</nav>
 	</div>
   </body>
