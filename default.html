@@ -32,7 +32,9 @@
         });
 
         document.observe('pomodorotimer:stopped', function(evt) {
-          jQuery('pomodoro').removeClass('selected');
+          jQuery('#pomodoro').removeClass('selected');
+          jQuery('#shortbreak').removeClass('selected');
+          jQuery('#longbreak').removeClass('selected');
         });
       }
       
