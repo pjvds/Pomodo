@@ -30,18 +30,25 @@
         document.observe('pomodorotimer:finished', function(evt) {
           notify();
         });
+
+        document.observe('pomodorotimer:stopped', function(evt) {
+          jQuery('pomodoro').removeClass('selected');
+        });
       }
       
       function wireUserInterfaceCommandEvents() {
         $('pomodoro').observe('click', function(evt) {
+			jQuery(this).addClass('selected');
            pTimer.startPomodoro(); 
         });
         
         $('shortbreak').observe('click', function(evt) {
+			jQuery(this).addClass('selected');
            pTimer.startShortBreak(); 
         });
         
         $('longbreak').observe('click', function(evt) {
+			jQuery(this).addClass('selected');
            pTimer.startLongBreak();
         });
       }
