@@ -1,54 +1,115 @@
-/* Tell the browser to render HTML 5 elements as block */
-header, footer, aside, nav, article {
-	display: block;
-}
-
 body {
-  text-align: center;
-	margin: 0 auto;
-	font: 13px/22px Helvetica, Arial, sans-serif;
-	background: #F1F3F6;
+/*	text-align: center;*/
 	text-shadow: white 0px 1px 0px, rgba(0, 0, 0, 0.199219) 0px 2px 5px;
+	background-color: #B2C2D8;
+	font-family: "Lucida Grande", Verdana;
 }
 
 #display {
-  display: inline-block;
-  background: #F47920;
-  border-radius: 16px;
-  z-index:1000;
-  position: relative;
+	font-family: "Cronos Pro", "Apple Myriad", "Lucida Grande", Verdana;
+	background-color: #D5D5D5;
+	-webkit-border-radius: 0.75em;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#D9D9D9), to(#ABABAB));
+	-webkit-box-shadow: 0 0.15em 0.17em rgba(0, 0, 0, 0.5);
+	display: inline-block;
+	padding: 0.4em;
+	padding-bottom: 0.6em;
+	margin-top: 96px;
+	text-align: center;
+	margin-bottom: 0.5em;
+	border-top-left-radius: 0.75em 0.75em;
+	border-top-right-radius: 0.75em 0.75em;
+	border-bottom-right-radius: 0.75em 0.75em;
+	border-bottom-left-radius: 0.75em 0.75em;
 }
 
 #value {
-  color: white;
-  padding: 14px;
-  font: normal normal normal 11.5em/normal Inconsolata;
-  z-index:1050;
+	margin-left: 4px;
+	margin-right: 10px;
+	margin-top: -8px;
+	margin-bottom: -8px;
+	padding: 3px;
+	font-size: 10em;
+	letter-spacing: -0.075em;
+	vertical-align: middle;
 }
 
-#pomodoro {
-  position: absolute;
-  display: block;
-  border-top-right-radius: 22px;
-  z-index:10;
+#wrap {
+	width: 26.8em;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-#shortbreak {
-
+#inputstrip {
+	font-family: "Lucida Grande", Verdana;
+	display: table;
+	text-align: center;
+	width: 100%;
+	margin-top: .5em;
+	background-color: #D5D5D5;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#C9C9C9), to(#8C8C8C));
+	-webkit-border-radius: 0.75em;
+	-webkit-box-shadow: 0 0.15em 0.17em rgba(0, 0, 0, 0.5);
+	text-align: center;
+	position: relative;
+	border-top-left-radius: 0.75em 0.75em;
+	border-top-right-radius: 0.75em 0.75em;
+	border-bottom-right-radius: 0.75em 0.75em;
+	border-bottom-left-radius: 0.75em 0.75em;
 }
-
-#longbreak {
-  border-bottom-right-radius: 22px;
+nav a:hover, nav a:active {
+    background: rgba(25, 25, 25, 0.15);
+    color: #353535;
+    text-shadow: 0 0.08em 0.1em rgba(220, 220, 220, 0.45);
 }
-
-.tab {
-  padding-right: 6px;
-  position: absolute;
-  display: block;
-  text-align: right;
-  vertical-align: middle;
-  background: #ffffff;
-  border-style: solid;
-  border-width: 1px;
-  border-color: grey;
+nav a.selected {
+	font-weight: bold;
+	color: white;
+	background: rgba(25, 25, 25, 0.35);
+	background: rgba(25, 25, 25, 0.35);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(25, 25, 25, 0.25)), to(rgba(25, 25, 25, 0.45)));
+	text-shadow: 0 -0.1em 0.1em rgba(25, 25, 25, 0.55);
+}
+nav a:first-child {
+	-webkit-border-top-left-radius: 0.75em;
+	-webkit-border-bottom-left-radius: 0.75em;
+	border-left: 0 transparent none;
+	border-top-left-radius: 0.75em 0.75em;
+	border-bottom-left-radius: 0.75em 0.75em;
+}
+nav a {
+	text-decoration: none;
+	display: table-cell;
+	font-size: 0.9em;
+	color: #393939;
+	padding: 0.65em;
+	text-shadow: 0 0.08em 0.1em rgba(220, 220, 220, 0.65);
+	border-left: 1px solid rgba(50, 50, 50, 0.3);
+}
+a:-webkit-any-link {
+	color: -webkit-link;
+	text-decoration: underline;
+	cursor: auto;
+}
+nav {
+	font-family: "Lucida Grande", Verdana;
+	display: table;
+	width: 100%;
+	margin-top: 1em;
+	background-color: #D5D5D5;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#C9C9C9), to(#8C8C8C));
+	-webkit-border-radius: 0.75em;
+	-webkit-box-shadow: 0 0.15em 0.17em rgba(0, 0, 0, 0.5);
+	text-align: center;
+	position: relative;
+	border-top-left-radius: 0.75em 0.75em;
+	border-top-right-radius: 0.75em 0.75em;
+	border-bottom-right-radius: 0.75em 0.75em;
+	border-bottom-left-radius: 0.75em 0.75em;
+}
+nav a:last-child {
+	-webkit-border-top-right-radius: 0.75em;
+	-webkit-border-bottom-right-radius: 0.75em;
+	border-top-right-radius: 0.75em 0.75em;
+	border-bottom-right-radius: 0.75em 0.75em;
 }

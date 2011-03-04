@@ -48,7 +48,7 @@
       }
       
       function wireUserInterfaceEyeCandyEvents() {
-        var tabCount = 3;
+        /*var tabCount = 3;
         var margin=12;
 
         var display = jQuery('#display');
@@ -72,7 +72,7 @@
           jQuery(tab).mouseleave(function(){
             jQuery(this).animate({left: '-=65'});
           });
-        });
+        });*/
       }
       
       function setTime(evt) {
@@ -87,14 +87,18 @@
     </script>
   </head>
   <body onload="init()">
+	<div id="wrap">
     <header>
       <h1>Pomodo</h1>
     </header>
       <div id="display">
         <div id="value">00:00</div>
       </div>
-      <div id="pomodoro" class="tab"><p>Pomodoro</p></div>
-      <div id="shortbreak" class="tab"><p>Short break</p></div>
-      <div id="longbreak" class="tab"><p>long break</p></div>
+	<nav id="inputstrip">
+		<a id="pomodoro" class="tab">Pomodoro</a>
+		<a id="shortbreak" class="tab">Short break</a>
+		<a id="longbreak" class="tab">long break</a>
+	</nav>
+	</div>
   </body>
 </html>
