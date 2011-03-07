@@ -58,6 +58,26 @@ body {
     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#c9c9c9), to(#8c8c8c));
 }
 
+#instructions {
+	-webkit-box-shadow: rgba(0, 0, 0, 0.246094) 0px 1px 1px 0px;
+	background-color: #9BA8BE;
+	border-bottom-left-radius: 9px;
+	border-bottom-right-radius: 9px;
+	border-top-color: transparent;
+	border-top-left-radius: 9px;
+	border-top-right-radius: 9px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	color: black;
+	display: block;
+	font-family: 'Lucida Grande', Verdana;
+	margin-top: 30px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 7px;
+	font-size: 10pt;
+}
+
 #leftPipe {
 	float: left;
 	margin-left: 15px;

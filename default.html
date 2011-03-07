@@ -23,7 +23,8 @@
 		</script>
 	</head>
 	<body onload="init()">
-		<section id="wrap">
+		<div id="wrap">
+			<section id="pomodori">
 			<div id="display">
 			    <time id="value">00:00</time>
 			</div>
@@ -36,8 +37,19 @@
 			<nav id="inputstrip">
 				<a id="pomodoro" href="#" onclick="return false;">Pomodoro</a>
 				<a id="shortbreak" href="#" onclick="return false;">Short break</a>
-				<a id="longbreak" href="#" onclick="return false;">long break</a>
+				<a id="longbreak" href="#" onclick="return false;">Long break</a>
 			</nav>
-		</section>
+			</section>
+			<section id="instructions">
+				<h2>Pomodoro instructions</h2>
+					<ol>
+	                    <li>Choose a task to be accomplished</li>
+	                    <li>Start the <i>Pomodoro</i> timer.</li>
+	                    <li>Work on the task until the Pomodoro rings.</li>
+	                    <li>Take a <i>short break</i>.</li>
+	                    <li>Every 4 Pomodoros take a <i>long break</i>.</li>
+	                </ol>
+			</section>
+		</div>
 	</body>
 </html>
