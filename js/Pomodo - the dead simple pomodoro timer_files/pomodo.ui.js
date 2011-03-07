@@ -35,7 +35,7 @@ function wirePomodoroEvents() {
 		jQuery(selector).removeClass('selected');
 	});
 	document.observe('pomodorotimer:unfinishedtimerfound', function(evt) {
-		timeFromStore = evt.memo;
+		this.timeFromStore = evt.memo;
 		setTime(evt);
 		
 		var selector = '#' + evt.memo.name;
@@ -79,8 +79,8 @@ function wireUserInterfaceCommandEvents() {
 		return false;
 	});
 	$('resume').observe('click', function(evt) {
-		var ms = timeFromStore.milliseconds;
-		var name = timeFromStore.name;
+		var ms = this.timeFromStore.milliseconds;
+		var name = this.timeFromStore.name;
 		pTimer.start(ms, name);
 	})
 }
