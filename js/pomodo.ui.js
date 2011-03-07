@@ -35,14 +35,20 @@ function wireUserInterfaceCommandEvents() {
 	$('pomodoro').observe('click', function(evt) {
 		jQuery(this).addClass('selected');
 		pTimer.startPomodoro();
+		
+		return false;
 	});
 	$('shortbreak').observe('click', function(evt) {
 		jQuery(this).addClass('selected');
 		pTimer.startShortBreak();
+
+		return false;
 	});
 	$('longbreak').observe('click', function(evt) {
 		jQuery(this).addClass('selected');
 		pTimer.startLongBreak();
+
+		return false;
 	});
 }
 function init() {
