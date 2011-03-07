@@ -27,6 +27,7 @@ body {
 }
 
 #overlay {
+	display: none;
 	position: absolute;
 	background-color: #303030;
     background: rgba(25, 25, 25, 0.35);
@@ -42,7 +43,6 @@ body {
 }
 
 #resume {
-	display:inline-block;
 	width: 80px;
 	height: 80px;
 	position:absolute; 
@@ -50,8 +50,6 @@ body {
 	left:50%;
 	margin-left: -40px;
 	margin-top: -40px;
-	text-align: center;
-	vertical-align: middle;
 	border-top-left-radius: 0.75em 0.75em;
 	border-top-right-radius: 0.75em 0.75em;
 	border-bottom-right-radius: 0.75em 0.75em;
