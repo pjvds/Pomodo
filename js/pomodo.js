@@ -51,12 +51,12 @@ var PomodoroTimer = Class.create( {
 	},
 	
 	startShortBreak: function() {
-		var ms = (1*10*1000)+999;
+		var ms = (5*10*1000)+999;
 		this.start(ms, "shortbreak");
 	},
 	
 	startLongBreak: function() {
-		var ms = (10*60*1000)+999;
+		var ms = (15*60*1000)+999;
 		this.start(ms, "longbreak");
 	},
 
