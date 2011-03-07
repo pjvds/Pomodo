@@ -48,13 +48,12 @@ function wirePomodoroEvents() {
 		dWidth = d.width()+'px';
 		
 		jQuery('#overlay').css({
-			'position': 'absolute',
 			'top': dTop,
 			'left': dLeft,
 			'height': dHeight,
 			'width': dWidth,
 			'z-index': 5000
-	      });
+	      }).show();
 	});
 }
 function wireUserInterfaceCommandEvents() {
