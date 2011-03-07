@@ -1,6 +1,36 @@
 var PomodoroTimer = Class.create( {
     initialize: function() {
 		this.total = 0.0;
+		
+		var storedTime = this.getTimeFromStore();
+		if(storedTime != null) {
+			this.fireUnfinishedTimerFound(storedTime.milliseconds, storedTime.name);
+		}
+	},
+	
+	function getTimeFromStore() {
+		if('localStorage' in window && window['localStorage'] !== null &&
+		   localStorage.getItem('pomodoro.time') != null &&
+		   localStorage.getItem('pomodoro.name') != null) {
+			return { time: localStorage['pomodoro.time'],
+			         name: localStorage['pomodoro.name'];
+		} else {
+			return null;
+		}
+	},
+	
+	function setTimeInStore(millisecondsLeft, name) {
+		if('localStorage' in window && window['localStorage'] !== null) {
+			localStorage['pomodoro.time'] = millisecondsLeft;
+			localStorage['pomodoro.name'] = name;
+		}
+	},
+	
+	function clearTimeInStore() {
+		if('localStorage' in window && window['localStorage'] !== null) {
+			localStorage.removeItem('pomodoro.time');
+			localStorage.removeItem('pomodoro.name');
+		}
 	},
 	
 	start: function(milliseconds, name) {
@@ -42,6 +72,7 @@ var PomodoroTimer = Class.create( {
 		this.millisecondsLeft -= diffInMs;
 		if(this.millisecondsLeft > 0) {
 			this.fireTickEvent(this.millisecondsLeft);
+			this.setTimeInStore(this.millisecondsLeft, this.name);
 			this.scheduleNextUpdate();
 		} else {
 			this.millisecondsLeft = 0;
@@ -73,6 +104,7 @@ var PomodoroTimer = Class.create( {
 			clearTimeout(this.timer);
 			this.timer = null;
 		}
+		this.clearTimeInStore();
 		this.lastUpdate = null;
 		this.millisecondsLeft = null;
 	},
@@ -94,6 +126,13 @@ var PomodoroTimer = Class.create( {
 	fireTickEvent: function(millisecondsLeft) {
 		var e = this.createTimeEventArgs(millisecondsLeft);
 		document.fire('pomodorotimer:tick', e);
+	},
+	
+	fireUnfinishedTimerFound: function(millisecondsLeft, name) {
+		var e = this.createTimeEventArgs(millisecondsLeft);
+		e.name = name;
+		
+		document.fire('pomodorotimer:unfinishedtimerfound', e);
 	},
 	
 	createTimeEventArgs: function(millisecondsLeft) {
