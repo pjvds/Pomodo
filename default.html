@@ -1,81 +1,27 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.0.0/prototype.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/date.js"></script>
-    <script type="text/javascript" src="js/pomodo.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
-
-    <script type="text/javascript">
-      var pTimer;
-    
-      function init() {
-        jQuery.noConflict();
-      
-        pTimer = new PomodoroTimer();
-        
-        wirePomodoroEvents();
-        wireUserInterfaceCommandEvents();
-      }
-      
-      function wirePomodoroEvents() {
-        document.observe('pomodorotimer:started', function(evt) {
-          setTime(evt);
-        });
-        
-        document.observe('pomodorotimer:tick', function(evt) {
-          setTime(evt);
-        });
-        
-        document.observe('pomodorotimer:finished', function(evt) {
-          notify();
-        });
-
-        document.observe('pomodorotimer:stopped', function(evt) {
-          jQuery('#pomodoro').removeClass('selected');
-          jQuery('#shortbreak').removeClass('selected');
-          jQuery('#longbreak').removeClass('selected');
-        });
-      }
-      
-      function wireUserInterfaceCommandEvents() {
-        $('pomodoro').observe('click', function(evt) {
-			jQuery(this).addClass('selected');
-           pTimer.startPomodoro(); 
-        });
-        
-        $('shortbreak').observe('click', function(evt) {
-			jQuery(this).addClass('selected');
-           pTimer.startShortBreak(); 
-        });
-        
-        $('longbreak').observe('click', function(evt) {
-			jQuery(this).addClass('selected');
-           pTimer.startLongBreak();
-        });
-      }
-      
-      function setTime(evt) {
-        var m = evt.memo.minutes;
-        var s = evt.memo.seconds;
-        
-        if(m < 10) { m = '0'+m; }
-        if(s < 10) { s = '0'+s; }
-        
-        $('value').innerHTML = m+':'+s;
-      }
-    </script>
-  </head>
-  <body onload="init()">
-	<div id="wrap">
-      <div id="display">
-        <div id="value">00:00</div>
-      </div>
-	<nav id="inputstrip">
-		<a id="pomodoro" href="#">Pomodoro</a>
-		<a id="shortbreak" href="#">Short break</a>
-		<a id="longbreak" href="#">long break</a>
-	</nav>
-	</div>
-  </body>
+	<head>
+		<meta charset='utf-8'>
+		<title>Pomodo - the plain simple pomodoro timer</title>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.0.0/prototype.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/date.js"></script>
+		<script type="text/javascript" src="js/pomodo.js"></script>
+		<script type="text/javascript" src="js/pomodo.ui.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+	</head>
+	<body onload="init()">
+		<section id="wrap">
+			<div id="display">
+			    <div id="value">
+					 00:00
+				</div>
+			</div>
+			<nav id="inputstrip">
+				<a id="pomodoro" href="#">Pomodoro</a>
+				<a id="shortbreak" href="#">Short break</a>
+				<a id="longbreak" href="#">long break</a>
+			</nav>
+		</section>
+	</body>
 </html>
