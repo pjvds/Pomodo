@@ -48,13 +48,11 @@ function wirePomodoroEvents() {
 		dWidth = d.width()+'px';
 		
 		jQuery('#overlay').css({
-			'opacity' : 0.6,
 			'position': 'absolute',
 			'top': dTop,
 			'left': dLeft,
 			'height': dHeight,
 			'width': dWidth,
-			'background-color': 'black',
 			'z-index': 5000
 	      });
 	});
