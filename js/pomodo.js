@@ -13,7 +13,7 @@ var PomodoroTimer = Class.create( {
 		   localStorage.getItem('pomodoro.time') != null &&
 		   localStorage.getItem('pomodoro.name') != null) {
 			return { time: localStorage['pomodoro.time'],
-			         name: localStorage['pomodoro.name'];
+			         name: localStorage['pomodoro.name'] };
 		} else {
 			return null;
 		}
