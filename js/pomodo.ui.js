@@ -1,5 +1,6 @@
 var pTimer;
 var timeFromStore;
+var originalTitle;
 
 function setTime(evt) {
     var m = evt.memo.minutes;
@@ -10,7 +11,13 @@ function setTime(evt) {
 	if(s < 10) {
 		s = '0'+s;
 	}
-	$('value').innerHTML = m+':'+s;
+	
+	var timeText = m+':'+s;
+	document.title = timeText;
+	$('value').innerHTML = timeText;
+}
+function resetTitle() {
+	originalTitle = document.title;
 }
 function wirePomodoroEvents() {
 	document.observe('pomodorotimer:started', function(evt) {
@@ -28,11 +35,13 @@ function wirePomodoroEvents() {
 		jQuery(selector).removeClass('selected');
 		jQuery('#display').css('-webkit-animation', 'alarm 0.5s infinite');
 
-		notify();
+		document.title = "Trrrrrring!"
+		document.getElementById('complete').play();
 	});
 	document.observe('pomodorotimer:stopped', function(evt) {
 		var selector = '#' + evt.memo.name;
 		jQuery(selector).removeClass('selected');
+		resetTitle();
 	});
 	document.observe('pomodorotimer:unfinishedtimerfound', function(evt) {
 		timeFromStore = evt.memo;
@@ -54,6 +63,8 @@ function wirePomodoroEvents() {
 			'width': dWidth,
 			'z-index': 5000
 	      }).show();
+		
+		resetTitle();
 	});
 }
 function wireUserInterfaceCommandEvents() {
@@ -92,6 +103,7 @@ function init() {
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
 	
+	originalTitle = document.title;
 	jQuery.noConflict();
 	wirePomodoroEvents();
 	wireUserInterfaceCommandEvents();
